@@ -24,3 +24,12 @@
 .content {
   @include box();
 }
+
+.alert {
+  background: lightgreen;
+  padding: 20px;
+  text-align: center;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 40px;
+}
