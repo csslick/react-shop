@@ -13,3 +13,7 @@
 .product {
   text-align: center;
 }
+
+.product .item {
+  cursor: pointer;
+}

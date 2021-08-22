@@ -3,6 +3,10 @@ import { useState } from 'react';
 import { Navbar, Container, Nav, Button} from "react-bootstrap";
 import "./App.css";
 import { Data } from './data';
+import { Link, Route, Switch } from 'react-router-dom';
+
+import Main from './components/Main';
+import Detail from './components/Detail';
 
 function App() {
 
@@ -11,14 +15,17 @@ function App() {
 
   return (
     <div className="App">
+
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand>
+          <Link to="/">Headphone Shop</Link>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#product">Product</Nav.Link>
-            <Nav.Link href="#contact">Contact</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="detail">Detail</Nav.Link>
+            <Nav.Link href="/contact">Contact</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -31,32 +38,17 @@ function App() {
         </Container>  
       </section>
 
-      <section id="product" className="container product">
-        <Items data={items} />
-      </section>
+      <Switch>
+        <Route path="/" exact componet={Main}>
+          <Main data={Data} />
+        </Route>
+        <Route path="/detail/:id">
+          <Detail data={Data} />
+        </Route>
+      </Switch>
       
     </div>
   );
-}
-
-function Items({data}) {
-
-  return (
-    <div className="row">
-      {
-        data.map((item, i) => {
-          return (
-            <div className="col-md-4" key={i}>
-              <img src={item.image} width="100%" />
-              <h4>{item.title}</h4>
-              <p>{item.content}</p>
-              <p>{item.price.toLocaleString()}원</p>
-            </div>
-          )
-        })
-      }
-    </div>
-  )
 }
 
 export default App;
