@@ -23,17 +23,16 @@ export default function Detail({data}) {
   })
 
   useEffect(() => {
-
     console.log('Detail mounted');
-    setTimeout(function(){
+    const alertBox = setTimeout(function(){
       setShowAlert(false);
     }, 2000);
 
-    // unmount 할 때 호출되는 코드
+    // clean up: unmount 할 때 호출되는 코드
     return () => {
       console.log('Detail unmounted');
+      clearInterval(alertBox);
     }
-
   }, [])
   
   return (
