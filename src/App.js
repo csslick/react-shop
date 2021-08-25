@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navbar, Container, Nav, Button} from "react-bootstrap";
 import "./App.css";
 import { Data } from './data';
@@ -12,6 +12,13 @@ function App() {
 
   const [items, setItems] = useState(Data);
   console.log(Data);
+
+  // 더보기 데이터를 가져오는 함수
+  function addItem (moreData) {
+    let newData = [...Data, ...moreData];
+    setItems(newData);
+    console.log(newData);
+  }
 
   return (
     <div className="App">
@@ -40,10 +47,10 @@ function App() {
 
       <Switch>
         <Route path="/" exact componet={Main}>
-          <Main data={Data} />
+          <Main data={items} addItem={addItem}/>
         </Route>
         <Route path="/detail/:id">
-          <Detail data={Data} />
+          <Detail data={items} />
         </Route>
       </Switch>
       
