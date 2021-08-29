@@ -11,7 +11,17 @@ import Detail from './components/Detail';
 function App() {
 
   const [items, setItems] = useState(Data);
-  console.log(Data);
+  const [stock, setStock] = useState([33, 55, 99]);
+  // console.log(Data);
+  // 재고 변경
+  const changeStock = (id) => {
+    console.log('재고변경');
+    let newArr = [...stock];
+    newArr[id] = newArr[id] - 1;
+    setStock(newArr);
+    console.log(newArr);
+    // console.log(id, stock[id]);
+  }
 
   // 더보기 데이터를 가져오는 함수
   function addItem (moreData) {
@@ -50,7 +60,7 @@ function App() {
           <Main data={items} addItem={addItem}/>
         </Route>
         <Route path="/detail/:id">
-          <Detail data={items} />
+          <Detail data={items} stock={stock} changeStock={changeStock} />
         </Route>
       </Switch>
       

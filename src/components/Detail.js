@@ -11,7 +11,7 @@ const StyledSection = styled.section`
   margin-bottom: 20px;
 `;
 
-export default function Detail({data}) {
+export default function Detail({data, stock, changeStock}) {
 
   const history = useHistory();
   const { id } = useParams();
@@ -50,7 +50,13 @@ export default function Detail({data}) {
           <h4 className="pt-5">{newData.title}</h4>
           <p className={styles.content}>{newData.content}</p>
           <p className={styles.price}>{newData.price.toLocaleString()}원</p>
-          <button className="btn btn-danger">주문하기</button>
+          <p className="stock">재고: {stock[id]}</p>
+          <button 
+            className="btn btn-danger" 
+            onClick={()=> {
+              changeStock(id);
+            }}
+          >주문하기</button>
           <button 
             className="btn btn-success ml-3" 
             onClick={ () => history.goBack() }

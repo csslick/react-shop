@@ -19,10 +19,13 @@ export default function Main({data, addItem}) {
       <button 
         className="btn btn-primary mt-4"
         onClick={()=>{
+          // 로딩중 표시...
+
           axios.get('https://raw.githubusercontent.com/csslick/react-shop/main/data2.json')
           .then(res=>{
-            // 데이터 추가(상위 컴퍼넌트 함수 호출)
-            addItem(res.data);
+            // 로딩표시 제거
+          
+            addItem(res.data);  // 데이터 추가(상위 컴퍼넌트 함수 호출)
           })  
           .catch(err=>{
             console.log(err);
