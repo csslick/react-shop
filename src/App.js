@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useState, useEffect } from 'react';
+import { useState, createContext } from 'react';
 import { Navbar, Container, Nav, Button} from "react-bootstrap";
 import "./App.css";
 import { Data } from './data';
@@ -7,6 +7,10 @@ import { Link, Route, Switch } from 'react-router-dom';
 
 import Main from './components/Main';
 import Detail from './components/Detail';
+// import StockContextProvider from './context';
+
+// 외부의 하위 콤퍼넌트에서 context를 전달하기 위해 export 함
+export const StockContext = createContext();
 
 function App() {
 
@@ -55,15 +59,16 @@ function App() {
         </Container>  
       </section>
 
-      <Switch>
-        <Route path="/" exact componet={Main}>
-          <Main data={items} addItem={addItem}/>
-        </Route>
-        <Route path="/detail/:id">
-          <Detail data={items} stock={stock} changeStock={changeStock} />
-        </Route>
-      </Switch>
-      
+      <StockContext.Provider value={{stock, changeStock}}>
+        <Switch>
+          <Route path="/" exact componet={Main}>
+              <Main data={items} addItem={addItem}/>
+          </Route>
+          <Route path="/detail/:id">
+              <Detail data={items} />
+          </Route>
+        </Switch>
+      </StockContext.Provider>
     </div>
   );
 }

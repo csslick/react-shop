@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'; // 오류시 4 또는 5 버전 사용
 // CSS 모듈 타입 선언(해당 컴퍼넌트 전용 CSS)
 import styles from './css/Detail.module.scss';
+// import { StockContext } from '../context';
+import { StockContext } from '../App';
 
 // 스타일드 변수는 함수 밖에 선언하세요
 const StyledSection = styled.section`
@@ -11,11 +13,12 @@ const StyledSection = styled.section`
   margin-bottom: 20px;
 `;
 
-export default function Detail({data, stock, changeStock}) {
+export default function Detail({data}) {
 
   const history = useHistory();
   const { id } = useParams();
   const [showAlert, setShowAlert] = useState(true);
+  const {stock, changeStock} = useContext(StockContext);
 
   // param과 제품 id가 일치하는 제품 정보를 가져온다.
   const newData = data.find(item => {
