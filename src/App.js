@@ -5,8 +5,10 @@ import "./App.css";
 import { Data } from './data';
 import { Link, Route, Switch } from 'react-router-dom';
 
+import MainVisual from './components/MainVisual';
 import Main from './components/Main';
 import Detail from './components/Detail';
+import Cart from './components/Cart';
 // import StockContextProvider from './context';
 
 // 외부의 하위 콤퍼넌트에서 context를 전달하기 위해 export 함
@@ -51,14 +53,6 @@ function App() {
         </Navbar.Collapse>
       </Navbar>
 
-      <section className="title">
-        <Container>
-          <h2>Shop</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum enim esse id distinctio quaerat illo facilis error possimus, dolore quasi ducimus sunt vero maiores itaque sit cumque temporibus saepe. Eius?</p>
-          <Button variant="primary">Primary</Button>
-        </Container>  
-      </section>
-
       <StockContext.Provider value={{stock, changeStock}}>
         <Switch>
           <Route path="/" exact componet={Main}>
@@ -69,6 +63,8 @@ function App() {
           </Route>
         </Switch>
       </StockContext.Provider>
+
+      <Route path="/cart" component={Cart} />
     </div>
   );
 }

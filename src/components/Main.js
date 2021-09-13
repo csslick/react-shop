@@ -1,3 +1,4 @@
+import MainVisual from '../components/MainVisual';
 import Item from './Item'
 
 // fetch()는 JSON을 Objec로 반환해주지 않아서 axios 사용함
@@ -8,7 +9,9 @@ import axios from 'axios';
 export default function Main({data, addItem}) {
 
   return (
-    <section id="product" className="container product">
+    <>
+      <MainVisual />
+      <section id="product" className="container product">
       <div className="row">
         {
           data.map((item, idx) => {
@@ -32,5 +35,6 @@ export default function Main({data, addItem}) {
           })
         }}>더보기</button>
   </section>
+    </>
   )
 }
