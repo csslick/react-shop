@@ -5,24 +5,29 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {combineReducers, createStore} from 'redux';
 
 let initState = [
   {
     id: 0,
-    name: "헤드폰1",
+    title: "헤드폰1",
     quan: 2
   },
   {
     id: 1,
-    name: "헤드폰2",
+    title: "헤드폰2",
     quan: 3
   },
 ]
 
 // redux store 수정 함수
 function reducer(state = initState, action) {
-  if(action.type === 'ADD') {
+  if(action.type === 'addItem'){
+    let newState = [...state];
+    newState.push(action._data);
+    console.log(action._data)
+    return newState;
+  } else if(action.type === 'ADD') {
     let newState = [...initState];
     newState[action.id].quan += 1;
     return newState;
@@ -36,7 +41,20 @@ function reducer(state = initState, action) {
   }
 }
 
-let store = createStore(reducer);
+let initAlert = true;
+function reducer2(state = initAlert, action) {
+  if(action.type == 'CLOSE') {
+    state = false;
+    return state;
+  } else {
+    return state;
+  }
+}
+
+let store = createStore(combineReducers({
+  reducer,
+  reducer2
+}));
 
 ReactDOM.render(
     <BrowserRouter>

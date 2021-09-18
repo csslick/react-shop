@@ -5,7 +5,6 @@ import "./App.css";
 import { Data } from './data';
 import { Link, Route, Switch } from 'react-router-dom';
 
-import MainVisual from './components/MainVisual';
 import Main from './components/Main';
 import Detail from './components/Detail';
 import Cart from './components/Cart';

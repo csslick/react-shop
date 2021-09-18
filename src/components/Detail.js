@@ -5,6 +5,7 @@ import styled from 'styled-components'; // 오류시 4 또는 5 버전 사용
 import styles from './css/Detail.module.scss';
 // import { StockContext } from '../context';
 import { StockContext } from '../App';
+import { connect } from 'react-redux';
 
 // 스타일드 변수는 함수 밖에 선언하세요
 const StyledSection = styled.section`
@@ -13,7 +14,7 @@ const StyledSection = styled.section`
   margin-bottom: 20px;
 `;
 
-export default function Detail({data}) {
+function Detail({data, dispatch}) {
 
   const history = useHistory();
   const { id } = useParams();
@@ -57,7 +58,16 @@ export default function Detail({data}) {
           <button 
             className="btn btn-danger" 
             onClick={()=> {
-              changeStock(id);
+              changeStock(id); // 재고 변경
+              dispatch({
+                type: 'addItem',
+                _data: {
+                  id: data[newData.id].id,
+                  title: data[newData.id].title,
+                  quan: 1,
+                }
+              }); // 항목추가
+              history.push('/cart'); // 장바구니로 이동
             }}
           >주문하기</button>
           <button 
@@ -69,3 +79,12 @@ export default function Detail({data}) {
     </StyledSection>
   )
 }
+
+function stateToProps(store) {
+  console.log(store)
+  return {
+    state: store
+  }
+}
+
+export default connect(stateToProps)(Detail);
