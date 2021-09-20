@@ -8,31 +8,37 @@ import {Provider} from 'react-redux';
 import {combineReducers, createStore} from 'redux';
 
 let initState = [
-  {
-    id: 0,
-    title: "헤드폰1",
-    quan: 2
-  },
-  {
-    id: 1,
-    title: "헤드폰2",
-    quan: 3
-  },
+  // {
+  //   id: 0,
+  //   title: "헤드폰1",
+  //   quan: 2
+  // },
+  // {
+  //   id: 1,
+  //   title: "헤드폰2",
+  //   quan: 3
+  // },
 ]
 
 // redux store 수정 함수
 function reducer(state = initState, action) {
   if(action.type === 'addItem'){
-    let newState = [...state];
-    newState.push(action._data);
-    console.log(action._data)
-    return newState;
+    let found = state.findIndex(item => item.id === action._data.id);
+    if(found >= 0) {
+      let newState = [...state];
+      newState[found].quan++;
+      return newState;
+    } else {
+      let newState = [...state];
+      newState.push(action._data);
+      return newState;
+    }
   } else if(action.type === 'ADD') {
-    let newState = [...initState];
+    let newState = [...state];
     newState[action.id].quan += 1;
     return newState;
   } else if (action.type === 'DEC') {
-    let newState = [...initState];
+    let newState = [...state];
     newState[action.id].quan <= 0 ? 
       newState[action.id].quan = 0 : newState[action.id].quan -= 1;
     return newState;

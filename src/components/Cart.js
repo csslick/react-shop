@@ -6,7 +6,7 @@ export default function Cart(props) {
 
   let state = useSelector(state => state);
   let isAlert = state.reducer2;
-  console.log(isAlert)
+  console.log(state)
 
   const dispatch = useDispatch();
 
